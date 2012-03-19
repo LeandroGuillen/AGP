@@ -19,6 +19,8 @@
 
 \begin{abstract}
 Historia de las curvas elípticas y la geometría proyectiva. Operaciones con puntos en curvas elípticas. Aplicación en la criptografía de las curvas elípticas.
+
+\emph{Trabajo para la asignatura de Tecnologías Específicas de la Ingeniería Informática (TEII). Curso 2011-2012. 3º de Grado en Ingeniería Informática.}
 \end{abstract}
 \newpage % salto de página manual
 \tableofcontents
@@ -61,6 +63,7 @@ Las curvas elípticas son de especial importancia en el campo de la teoría de n
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
 \section{Cálculo de puntos del infinito}
 \subsection{Representación homogénea de puntos}
 En coordenadas homogéneas todo punto bidimensional está definido por tres coordenadas, de tal modo que un punto con coordenadas $(x, y)$ se representa por la terna: $(X/Z, Y/Z, Z)$. Son útiles en geometría proyectiva porque permiten representar puntos en el infinito.
@@ -116,9 +119,67 @@ Por ejemplo, sea la curva elíptica $x^3-3x+1-y^2$ y dos puntos $p=(0,1)$ y $q=(
 
 Para hallar la suma gráficamente hay que trazar la recta secante que une a los puntos $p$ y $q$.
 
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=.5\linewidth]{imagenes/secantepuntos}
+\end{center}
+\caption{Cálculo de la recta secante que pasa por $p$ y por $q$.}
+\label{fig:secantepuntos}
+\end{figure}
+
+La ecuación de la recta es en este caso $$ -x-\frac{y-1}{\sqrt{3}-1} $$ como se muestra en la figura \ref{fig:secantepuntos}. Ahora tenemos un punto $O$ que es la intersección de la curva con la recta secante calculada.
+
+Trazando una linea vertical que sale desde el punto $O$ cortamos la recta en otro punto, y éste es el punto $p+q$ (figura \ref{fig:pmasq}).
+
+\begin{figure}[h]
+\begin{center}$
+\begin{array}{cc}
+\includegraphics[width=.5\linewidth]{imagenes/sumao}
+\includegraphics[width=.5\linewidth]{imagenes/pmasq}
+\end{array}$
+\end{center}
+\caption{Cálculo del punto $O$ y $p+q$.}
+\label{fig:pmasq}
+\end{figure}
+
+Existe un caso especial cuando se suma el mismo punto dos veces. Sea $p$ un punto de una curva elíptica. Se calcula $2p$ trazando la recta tangente que pasa por $p$ y viendo donde corta como se muestra en la figura \ref{fig:dosp}.
+
+La multiplicación de puntos de la curva elíptica consiste en sumar los puntos consigo mismos en la curva.
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=.5\linewidth]{imagenes/dosp}
+\end{center}
+\caption{Cálculo de $2p$.}
+\label{fig:dosp}
+\end{figure}
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
 \section{Aplicación en criptografía}
 
+Los autores Miller\cite{Miller85} y Koblitz\cite{Koblitz87} introdujeron las curvas elípticas sobre cuerpos finitos para uso en criptografía. Esta técnica permite ciertas ventajas sobre el tipo de criptografía RSA clásico en que el tamaño de las claves es menor para un nivel dado de seguridad. Esto permite ahorrar en memoria y aumentar la velocidad en las transmisiones en los dispositivos que hace uso de la criptografía de curvas elípticas. 
+
+Estas características lo hacen interesante para su uso en dispositivos móviles, redes de sensores o cualquier aplicación donde hay restricciones imporantes en cuanto a velocidad o capacidad de memoria y la seguridad es un factor imprescindible.
+
+Los sistemas de criptografía asimétrica utilizan dos claves: una que puede ser pública y una privada. Con la clave pública uno no tiene suficiente información para determinar la clave privada. Por ejemplo, en el problema del \emph{logaritmo discreto} es relativamente fácil y computacionalmente eficiente calcular $c$ en la ecuación $a^b=c$. Ya no es tan sencillo calcular $b$ dados $a$ y $c$. En este principio se basan este tipo de sistemas.
+
+En el caso de las curvas elípticas, utilizando la técnica de la multiplicación de puntos de la curva elíptica obtenemos una llamada \emph{función trampa}. Una función trampa no es más que una función como la descrita en párrafos anteriores, tal que su cálculo directo es sencillo pero su cálculo inverso es complejo.
+
+Existen una variedad de protocolos o esquemas basados en el logaritmo discreto: la curva elíptica de Diffie-Hellman (ECDH), el Esquema Integrado de Encriptación de Curva Elíptica (ECEIS), el Algoritmo de Firma Digital de Curva Elíptica (ECDSA) entre otros.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{Bibliografía}
+He usado extensivamente contenido de la \href{http://es.wikipedia.org}{Wikipedia} tanto en inglés como en español, así como algunos documentos y transparencias de la Universidad de Murcia, el \href{http://www.ime.usp.br/}{Instituto de Matemática e Estatística} (en portugués) y otros.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\appendix
+\section{Sobre este documento}
+Elaborado en \LaTeX bajo entorno Kile 2.1, KDE4, openSuse 64 bits. Control de versiones con git en \href{https://github.com/LeandroGuillen/AGP}{GitHub}.
+
+\newpage
 \bibliographystyle{plain}
 \bibliography{refs} % mi archivo refs.bib
 \end{document}
